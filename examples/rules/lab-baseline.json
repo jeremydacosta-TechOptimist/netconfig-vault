@@ -1,0 +1,28 @@
+{
+  "name": "lab-baseline",
+  "description": "Site-specific checks layered on top of the built-in baselines for the lab examples.",
+  "rules": [
+    {
+      "id": "LAB-NTP-001",
+      "title": "NTP servers come from the lab management ranges",
+      "severity": "medium",
+      "vendors": ["cisco-ios", "aruba"],
+      "must_match": [
+        "^\\s*ntp server (?:priority \\d+ )?(?:198\\.51\\.100\\.|203\\.0\\.113\\.)"
+      ],
+      "must_not_match": [],
+      "remediation": "Point NTP at the lab servers in 198.51.100.0/24 or 203.0.113.0/24."
+    },
+    {
+      "id": "LAB-LOG-001",
+      "title": "All devices log to the lab syslog collector",
+      "severity": "high",
+      "vendors": ["cisco-ios", "aruba"],
+      "must_match": [
+        "^\\s*logging (?:host )?203\\.0\\.113\\.20\\s*$"
+      ],
+      "must_not_match": [],
+      "remediation": "Configure the lab syslog collector 203.0.113.20."
+    }
+  ]
+}
